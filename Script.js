@@ -1,23 +1,36 @@
-function analyzeURL() {
-  const url = document.getElementById("urlInput").value.trim();
-  const resultBox = document.getElementById("resultBox");
-  const resultText = document.getElementById("resultText");
+const form = document.getElementById("urlForm");
+const urlInput = document.getElementById("urlInput");
+const resultDiv = document.getElementById("result");
+const resultText = document.getElementById("resultText");
+const copyBtn = document.getElementById("copyBtn");
+const loader = document.getElementById("loader");
 
-  if (!url) {
-    alert("Please enter a URL to analyze.");
-    return;
-  }
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const url = urlInput.value.trim();
+  
+  resultDiv.classList.add("hidden");
+  loader.style.display = "block";
 
-  // Mock logic — this is where a real ML model or API call would go
-  const isPhishing = url.includes("free-money") || url.includes("login-now") || url.includes("account-verification");
+  setTimeout(() => {
+    loader.style.display = "none";
+    resultDiv.classList.remove("hidden");
 
-  resultBox.classList.remove("safe", "phishing", "hidden");
+    // Simulated logic for phishing detection
+    if (url.includes("free-money") || url.includes("login-update") || url.includes("verify-now")) {
+      resultText.textContent = "⚠️ Warning: This link appears suspicious and may be a phishing site!";
+      resultText.style.color = "#ff7b72";
+    } else {
+      resultText.textContent = "✅ This link appears to be safe.";
+      resultText.style.color = "#56d364";
+    }
+  }, 2000);
+});
 
-  if (isPhishing) {
-    resultBox.classList.add("phishing");
-    resultText.textContent = "⚠️ This URL appears suspicious. Proceed with caution!";
-  } else {
-    resultBox.classList.add("safe");
-    resultText.textContent = "✅ This URL looks safe.";
-  }
-}
+copyBtn.addEventListener("click", () => {
+  navigator.clipboard.writeText(resultText.textContent);
+  copyBtn.textContent = "Copied!";
+  setTimeout(() => {
+    copyBtn.textContent = "Copy Result";
+  }, 2000);
+});
