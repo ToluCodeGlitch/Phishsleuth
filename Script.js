@@ -1,41 +1,23 @@
-function analyzePhish() {
-  const input = document.getElementById("userInput").value.toLowerCase();
-  const resultDiv = document.getElementById("result");
+function analyzeURL() {
+  const url = document.getElementById("urlInput").value.trim();
+  const resultBox = document.getElementById("resultBox");
+  const resultText = document.getElementById("resultText");
 
-  const redFlags = ["verify", "urgent", "login", "update", "password", "win", "click", "bank", "suspend"];
-  const suspiciousLinks = /(bit\.ly|tinyurl|freegift|\.tk|\.ml|\.ga)/;
-
-  let score = 0;
-  let feedback = [];
-
-  redFlags.forEach(word => {
-    if (input.includes(word)) {
-      score += 1;
-      feedback.push(`⚠️ Found suspicious word: "${word}"`);
-    }
-  });
-
-  if (suspiciousLinks.test(input)) {
-    score += 2;
-    feedback.push("⚠️ Link looks suspicious or shortened.");
+  if (!url) {
+    alert("Please enter a URL to analyze.");
+    return;
   }
 
-  if (score > 2) {
-    resultDiv.innerHTML = `
-      <p><strong>🔴 This message is highly suspicious!</strong></p>
-      <ul>${feedback.map(f => `<li>${f}</li>`).join("")}</ul>
-    `;
-  } else if (score > 0) {
-    resultDiv.innerHTML = `
-      <p><strong>🟠 Warning: Potential risk detected.</strong></p>
-      <ul>${feedback.map(f => `<li>${f}</li>`).join("")}</ul>
-    `;
+  // Mock logic — this is where a real ML model or API call would go
+  const isPhishing = url.includes("free-money") || url.includes("login-now") || url.includes("account-verification");
+
+  resultBox.classList.remove("safe", "phishing", "hidden");
+
+  if (isPhishing) {
+    resultBox.classList.add("phishing");
+    resultText.textContent = "⚠️ This URL appears suspicious. Proceed with caution!";
   } else {
-    resultDiv.innerHTML = `<p><strong>🟢 No phishing signs detected. Still, stay cautious.</strong></p>`;
+    resultBox.classList.add("safe");
+    resultText.textContent = "✅ This URL looks safe.";
   }
-
-  // Save to local storage
-  let history = JSON.parse(localStorage.getItem("phishHistory")) || [];
-  history.push({ input, result: resultDiv.innerText });
-  localStorage.setItem("phishHistory", JSON.stringify(history));
 }
