@@ -2,46 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PhishGuard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Phishing URL Analyzer</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3176/3176366.png" />
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="icon" href="https://img.icons8.com/fluency/48/shield-with-checkmark.png"/>
 </head>
 <body>
   <div class="container">
-    <div class="icon">
-      <i class="fas fa-shield-alt"></i>
-    </div>
-    <h1>PhishGuard</h1>
-    <p class="tagline">Suspicious Link Analyzer</p>
+    <h1><img src="https://img.icons8.com/fluency/48/shield-with-checkmark.png"/> Phishing URL Analyzer</h1>
+    <p class="tagline">Enter a website URL to check for signs of phishing or malicious behavior.</p>
 
-    <input type="text" id="urlInput" placeholder="Enter a URL to analyze..." />
+    <input type="text" id="urlInput" placeholder="https://example.com" />
     <button onclick="analyzeURL()">Analyze</button>
 
-    <div id="result"></div>
+    <div id="result" class="result-box hidden"></div>
+
+    <footer>
+      <p>🛡️ Created by <a href="https://github.com/ToluCodeGlitch" target="_blank">ToluCodeGlitch</a></p>
+    </footer>
   </div>
 
-  <script>
-    function analyzeURL() {
-      const url = document.getElementById("urlInput").value.trim();
-      const result = document.getElementById("result");
-
-      if (!url) {
-        result.innerHTML = "<p class='error'>Please enter a valid URL.</p>";
-        return;
-      }
-
-      // Simulated result for now (you'll later integrate real logic)
-      const suspicious = ["bit.ly", "tinyurl", "phishy.com"];
-      const isSuspicious = suspicious.some((s) => url.includes(s));
-
-      if (isSuspicious) {
-        result.innerHTML = "<p class='danger'>⚠️ This URL may be suspicious. Proceed with caution.</p>";
-      } else {
-        result.innerHTML = "<p class='safe'>✅ This URL looks safe.</p>";
-      }
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
