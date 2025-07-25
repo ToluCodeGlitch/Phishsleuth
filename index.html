@@ -3,19 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PhishSleuth</title>
+  <title>PhishSleuth - URL Analyzer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>🕵️‍♂️ PhishSleuth</h1>
-    <p class="tagline">Detect suspicious URLs before they catch you.</p>
+    <h1>PhishSleuth</h1>
+    <p class="subtitle">Analyze suspicious links in seconds</p>
+    
+    <form id="urlForm">
+      <input type="url" id="urlInput" placeholder="Paste a URL here..." required />
+      <button type="submit">Analyze</button>
+    </form>
 
-    <input type="text" id="urlInput" placeholder="Enter a URL to analyze..." />
-    <button onclick="analyzeURL()">Analyze</button>
+    <div class="loader" id="loader"></div>
 
-    <div id="resultBox" class="hidden">
+    <div id="result" class="hidden">
       <p id="resultText"></p>
+      <button id="copyBtn">Copy Result</button>
     </div>
   </div>
 
