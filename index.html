@@ -3,38 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PhishSleuth - Phishing Detector</title>
+  <title>PhishSleuth</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>🎣 PhishSleuth</h1>
-    <p>Learn. Detect. Stay Safe.</p>
-  </header>
+  <div class="container">
+    <h1>🕵️‍♂️ PhishSleuth</h1>
+    <p class="tagline">Detect suspicious URLs before they catch you.</p>
 
-  <section class="what-is">
-    <h2>What is Phishing?</h2>
-    <p>Imagine a thief slipping a fake letter into your mailbox pretending to be your bank... that's phishing. It's trickery, and it can be dangerous. Let's learn to spot it.</p>
-  </section>
+    <input type="text" id="urlInput" placeholder="Enter a URL to analyze..." />
+    <button onclick="analyzeURL()">Analyze</button>
 
-  <section class="detector">
-    <h2>🛡️ Check a Suspicious Message or Link</h2>
-    <textarea id="userInput" placeholder="Paste suspicious text or URL here..."></textarea>
-    <button onclick="analyzePhish()">Analyze</button>
-    <div id="result"></div>
-  </section>
-
-  <section class="examples">
-    <h2>📘 Real Phishing Examples</h2>
-    <div id="examples">
-      <p><strong>Example 1:</strong> "Your account is suspended! Click here to verify immediately."</p>
-      <p><strong>Example 2:</strong> "You've won an iPhone! Enter your details now."</p>
+    <div id="resultBox" class="hidden">
+      <p id="resultText"></p>
     </div>
-  </section>
-
-  <footer>
-    <p>Built with ❤️ for your safety. © 2025</p>
-  </footer>
+  </div>
 
   <script src="script.js"></script>
 </body>
