@@ -1,43 +1,31 @@
 function analyzeURL() {
-  const url = document.getElementById("urlInput").value.trim();
-  const resultBox = document.getElementById("result");
+  const url = document.getElementById("urlInput").value;
+  const resultText = document.getElementById("resultText");
+  const resultBox = document.getElementById("resultBox");
 
   if (!url) {
-    resultBox.innerHTML = "❌ Please enter a URL.";
-    resultBox.style.borderLeftColor = "#ff5252";
+    resultText.textContent = "Please enter a URL.";
     resultBox.classList.remove("hidden");
     return;
   }
 
-  let warning = "";
+  // Basic phishing heuristics
+  let riskScore = 0;
 
-  if (url.length > 75) {
-    warning += "⚠️ The URL is quite long. Phishing links are often long to hide malicious paths.<br/>";
-  }
+  if (url.includes("@")) riskScore += 2;
+  if (url.length > 75) riskScore += 1;
+  if (url.match(/^http:\/\//)) riskScore += 1;
+  if (url.match(/([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)/)) riskScore += 2;
 
-  if (url.includes("@")) {
-    warning += "⚠️ URLs containing '@' symbols can redirect users deceptively.<br/>";
-  }
-
-  if (url.split('.').length > 4) {
-    warning += "⚠️ The domain has many subdomains — this is suspicious.<br/>";
-  }
-
-  if (/(login|verify|secure|update)/i.test(url)) {
-    warning += "⚠️ Words like 'login', 'verify', 'secure', or 'update' are common in phishing links.<br/>";
-  }
-
-  if (!url.startsWith("https://")) {
-    warning += "⚠️ The URL is not secure (HTTPS missing).<br/>";
-  }
-
-  if (!warning) {
-    resultBox.innerHTML = "✅ This URL looks safe based on basic checks.";
-    resultBox.style.borderLeftColor = "#4caf50";
+  let riskLevel = "";
+  if (riskScore <= 1) {
+    riskLevel = "✅ Safe (Low Risk)";
+  } else if (riskScore <= 3) {
+    riskLevel = "⚠️ Suspicious (Medium Risk)";
   } else {
-    resultBox.innerHTML = warning;
-    resultBox.style.borderLeftColor = "#f44336";
+    riskLevel = "🚨 Dangerous (High Risk)";
   }
 
+  resultText.textContent = `Analysis: ${riskLevel}`;
   resultBox.classList.remove("hidden");
 }
