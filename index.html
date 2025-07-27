@@ -3,23 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Phishing URL Analyzer</title>
+  <title>PhishGuard - URL Analyzer</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="https://img.icons8.com/fluency/48/shield-with-checkmark.png"/>
 </head>
 <body>
   <div class="container">
-    <h1><img src="https://img.icons8.com/fluency/48/shield-with-checkmark.png"/> Phishing URL Analyzer</h1>
-    <p class="tagline">Enter a website URL to check for signs of phishing or malicious behavior.</p>
-
-    <input type="text" id="urlInput" placeholder="https://example.com" />
+    <h1>PhishGuard 🔐</h1>
+    <p>Analyze suspicious links instantly</p>
+    
+    <input type="text" id="urlInput" placeholder="Enter a URL to check" />
     <button onclick="analyzeURL()">Analyze</button>
-
-    <div id="result" class="result-box hidden"></div>
-
-    <footer>
-      <p>🛡️ Created by <a href="https://github.com/ToluCodeGlitch" target="_blank">ToluCodeGlitch</a></p>
-    </footer>
+    
+    <div id="resultBox" class="hidden">
+      <h2>Result:</h2>
+      <p id="resultText"></p>
+    </div>
   </div>
 
   <script src="script.js"></script>
